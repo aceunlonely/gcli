@@ -1,0 +1,19 @@
+{
+    "name" : "demo",
+    "gnodes": [
+        {
+            "type" : "gchain",
+            "name" : "gchain-demo001"
+        },
+        {
+            "type" : "exe",
+            "name" : "demo001",
+            "params" : {
+            }
+        },
+        {
+            "type" :"gchain",
+            "name" : "gchain-demo002"
+        }
+    ]
+}
