@@ -1,0 +1,15 @@
+{
+    "name" : "demo",
+    "gnodes": [
+        {
+            "type" : "exe",
+            "name" : "copy",
+            "params" : {
+            }
+        },
+        {
+            "type" :"exe",
+            "name" : "del"
+        }
+    ]
+}

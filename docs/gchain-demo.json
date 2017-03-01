@@ -3,7 +3,7 @@
     "gnodes": [
         {
             "type" : "gchain",
-            "name" : "gchain-demo001"
+            "name" : "g.demo001"
         },
         {
             "type" : "exe",
@@ -13,7 +13,7 @@
         },
         {
             "type" :"gchain",
-            "name" : "gchain-demo002"
+            "name" : "g.demo002"
         }
     ]
 }
