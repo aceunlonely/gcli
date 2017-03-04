@@ -16,3 +16,7 @@ exports.check =function(chain){
 
 
 }
+
+exports.run = function(gchainPath){
+
+}

@@ -1,7 +1,7 @@
 /** gchain */
 var ge = require('./gchain-engine');
+var config = require('../config.js');
 var path = require('path');
-
 
 /** 
  *  执行 gchain
@@ -11,16 +11,12 @@ exports.run=function(gchain,fPipe){
     // 判断是否是字符串
     if((typeof gchain=='string')&&gchain.constructor==String)
     {   
-        if(path.isAbsolute(gchain))
+        var gch = gchain;
+        if(!path.isAbsolute(gch))
         {
-
-
+            gch= path.join(config.workspace,gch);
         }
-        else
-        {
-            
-        }
-
+        ge.run(gch);
     }
     else
     {
