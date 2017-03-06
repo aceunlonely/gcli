@@ -1,0 +1,17 @@
+{
+  "name": "gcli",
+  "version": "1.0.0",
+  "description": "great cli",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "gcli"
+  ],
+  "author": "apporoad",
+  "license": "MIT"
+}
