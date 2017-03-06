@@ -13,6 +13,10 @@ exports.getPipeTemplate= function(type){
     {
         throw new Error('can not find your pipe template : ' + type);
     }
+    if(!p.instance)
+    {
+        throw new Error('inner error : ' + type +'.pipe.js has not instance')
+    }
     return p.instance;
 }
 
@@ -20,4 +24,4 @@ exports.getPipeTemplate= function(type){
 /** check Pipe interface */
 exports.checkPipe =function(pipe){
     return gpipe.check(pipe)
-}
+}  
