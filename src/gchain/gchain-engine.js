@@ -7,8 +7,31 @@ var fs  = require('fs')
 var innerCheck = function(gchainJson)
 {
     var result = {isPass: true, msg:"" };
-
-
+    if(!gchainJson.name)
+    {
+        result.isPass=false;
+        result.msg ="your chainJson must have a name";
+    }
+    for(var i=0; i < gchainJson.gnodes.length;i++ )
+    {
+        var node = gchainJson.gnodes[i];
+        if(!node.type)
+        {
+            result.isPass=false;
+            result.msg +="| your " +(i+1) + " node must have a type";
+        }
+        else if(node.type !='exe' && node.type!='cc')
+        {
+            result.isPass=false;
+            result.msg+="| your "+(i+1) +" node have a wrong type";
+        }
+        if(!node.name)
+        {
+            result.isPass=false;
+            result.msg +="| your "+(i+1)+" node must have a name";
+        }
+           
+    }
     return result;
 }
 
@@ -46,8 +69,33 @@ var innerRun = function(gchain,gpipe){
     for(var i=0; i < gchainJson.gnodes.length;i++ )
     {
         var node = gchainJson.gnodes[i];
-        // todos
+        
+        //type
+        if(node.type == 'exe')
+        {
+            //todo 
+        }
+        else if(node.type =='cc')
+        {
+            //recurse
+            //first we should judge where is cc ,subDir or at workspace
+            var subgchain = node.name;
+            var nodeRealDir = String(node.name).toString().replace('.','/');
+            if(fs.existsSync(path.join(realPath,"chain",nodeRealDir)))
+            {
+                subgchain=path.join(realPath,"chain",nodeRealDir);
+            }
+            var p = innerRun(subgchain,tpipe);
+            //做 类似原型链处理
+            if(!p)
+            {
+                p.pre= tpipe;
+                tpipe = p;
+            }
+        }
     }
+
+    return tpipe;
 }
 
 

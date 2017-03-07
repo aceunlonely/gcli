@@ -2,7 +2,7 @@
     "name" : "demo",
     "gnodes": [
         {
-            "type" : "gchain",
+            "type" : "cc",
             "name" : "g.demo001"
         },
         {
@@ -12,7 +12,7 @@
             }
         },
         {
-            "type" :"gchain",
+            "type" :"cc",
             "name" : "g.demo002"
         }
     ]

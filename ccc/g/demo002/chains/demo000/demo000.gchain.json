@@ -1,0 +1,12 @@
+{
+    "name" : "demo000",
+    "gnodes": [
+        {
+            "type" : "exe",
+            "name" : "show",
+            "params" : {
+                "special" : 1
+            }
+        }
+    ]
+}
