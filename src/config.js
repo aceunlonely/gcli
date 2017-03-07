@@ -9,8 +9,11 @@ var jsonData =JSON.parse(data);
 
 
 
+if(jsonData.workspace == 'defaut')
+{
+    jsonData.workspace = path.join(path.dirname(__dirname),'ccc');
+}
 
-jsonData.workspace ='abc';
 
 
 
