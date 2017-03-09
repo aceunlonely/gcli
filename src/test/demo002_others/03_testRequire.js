@@ -5,3 +5,9 @@ var i2 = require('./00_03.js');
 
 //i1.show();
 //i2.show();
+
+
+
+//console.log(require('./no.js'));
+
+console.log(require('./03_test').callback);

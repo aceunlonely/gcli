@@ -57,11 +57,15 @@ var innerRun = function(gchain,gpipe){
     {
         throw Error('not a json file :' + gchainFilePath);
     }
-    // check gchain.json 
-    var r = innerCheck(gchainJson);
-    if(!r.isPass)
+    
+    if(config.strict)
     {
-        throw Error('gchain must be according to the  standard : '+ gchainFilePath);
+        // check gchain.json 
+        var r = innerCheck(gchainJson);
+        if(!r.isPass)
+        {
+            throw Error('gchain must be according to the  standard : '+ gchainFilePath);
+        }
     }
 
     // now excute the chain
@@ -73,7 +77,34 @@ var innerRun = function(gchain,gpipe){
         //type
         if(node.type == 'exe')
         {
-            //todo 
+            // get exe path by node.name
+            var exePath = Path.join(realPath,'exes',node.name);
+            if(config.strict)
+            {
+                if(!fs.existsSync(exePath))
+                {
+                    throw new Error("can not find the executes path :" + exePath);
+                }
+            }
+            //now find we find the path, let's load it 
+            var exe = require(exePath);
+            if(config.strict)
+            {
+                // judge exe has its callback function
+                if(!exe.callback)
+                {
+                    throw new Error("execute must contains a exports.callback function" + exePath);
+                }
+            }
+            //now we call the exe
+            var rPipe = exe.callback(gpipe,node.params);
+            //做 类似原型链处理
+            if(!rPipe)
+            {   
+                rPipe.pre= tpipe;
+                tpipe=rPipe;
+            }
+
         }
         else if(node.type =='cc')
         {
@@ -106,8 +137,7 @@ var innerRun = function(gchain,gpipe){
 
 /** here to check chain */
 exports.check =function(chain){
-
-
+    //todo
 }
 
 exports.run = innerRun

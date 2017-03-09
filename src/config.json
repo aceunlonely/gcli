@@ -1,3 +1,4 @@
 {
-    "workspace" : "defaut"
+    "workspace" : "defaut",
+    "strict" : true
 }

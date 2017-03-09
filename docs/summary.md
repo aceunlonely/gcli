@@ -35,3 +35,15 @@ dir,we will find it from workspace
     if no input , have output ,we will give the next gnode the output gpipe as its input
     if have input ,no output , we will give the next gnode the input gpipe as its input
     if have input ,have outpu ,we will give the next gnode the output gpipe as its input && the input will be put into [output.pre]
+* gnodes must have its struct like: 
+        {
+            "type" : "exe",
+            "name" : "copy",
+            "params" : {
+            }
+        }
+ PS: other key is invalid
+
+
+ * exe is node typed directory, entry can be 'index.js' or defined by 'package.json'
+ * exe must have an exports.callback function, otherwise throws Error
