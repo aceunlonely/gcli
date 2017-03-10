@@ -3,13 +3,9 @@
     "gnodes": [
         {
             "type" : "exe",
-            "name" : "copy",
+            "name" : "alert",
             "params" : {
             }
-        },
-        {
-            "type" :"exe",
-            "name" : "del"
         },
         {
             "type" : "cc",

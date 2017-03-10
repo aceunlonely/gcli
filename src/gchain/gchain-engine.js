@@ -99,7 +99,7 @@ var innerRun = function(gchain,gpipe){
             //now we call the exe
             var rPipe = exe.callback(gpipe,node.params);
             //做 类似原型链处理
-            if(!rPipe)
+            if(!rPipe && rPipe!=tpipe)
             {   
                 rPipe.pre= tpipe;
                 tpipe=rPipe;
@@ -118,7 +118,7 @@ var innerRun = function(gchain,gpipe){
             }
             var p = innerRun(subgchain,tpipe);
             //做 类似原型链处理
-            if(!p)
+            if(!p && p !=tpipe)
             {
                 p.pre= tpipe;
                 tpipe = p;
