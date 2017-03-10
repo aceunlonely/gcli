@@ -1,27 +1,31 @@
 
+function innerGet()
+{
+    var pipe ={};
 
-var pipe ={};
+    //type
+    pipe.type='null';
 
-//type
-pipe.type='null';
+    //name 
+    pipe.name='null';
 
-//name 
-pipe.name='null';
+    //value
+    pipe.value= null;
 
-//value
-pipe.value= null;
+    //ext
+    pipe.ext={};
 
-//ext
-pipe.ext={};
+    //check
+    pipe.check = function(){
+        return true;
+    }
 
-//check
-pipe.check = function(){
-    return true;
+    return pipe;
 }
 
-
-
 //输出pipe
-exports.instance = pipe;
+exports.getInstance = innerGet;
 
-exports.object = pipe;
+exports.getObject = innerGet;
+
+exports.get = innerGet;

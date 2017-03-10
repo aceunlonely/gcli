@@ -13,11 +13,17 @@ exports.getPipeTemplate= function(type){
     {
         throw new Error('can not find your pipe template : ' + type);
     }
-    if(!p.instance)
+    if(!p.get)
     {
-        throw new Error('inner error : ' + type +'.pipe.js has not instance')
+        throw new Error('inner error : ' + type +'.pipe.js has not get')
     }
-    return p.instance;
+    var object =p.get();
+    if(!object)
+    {
+        throw new Error('inner error : ' + type +'.pipe.js can not return a usefull object')
+    }
+    debugger;
+    return p.get();
 }
 
 

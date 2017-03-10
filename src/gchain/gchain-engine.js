@@ -78,7 +78,7 @@ var innerRun = function(gchain,gpipe){
         if(node.type == 'exe')
         {
             // get exe path by node.name
-            var exePath = Path.join(realPath,'exes',node.name);
+            var exePath = path.join(realPath,'exes',node.name);
             if(config.strict)
             {
                 if(!fs.existsSync(exePath))
@@ -110,11 +110,12 @@ var innerRun = function(gchain,gpipe){
         {
             //recurse
             //first we should judge where is cc ,subDir or at workspace
+            debugger;
             var subgchain = node.name;
             var nodeRealDir = String(node.name).toString().replace('.','/');
-            if(fs.existsSync(path.join(realPath,"chain",nodeRealDir)))
+            if(fs.existsSync(path.join(realPath,"chains",nodeRealDir)))
             {
-                subgchain=path.join(realPath,"chain",nodeRealDir);
+                subgchain=path.join(realPath,"chains",nodeRealDir);
             }
             var p = innerRun(subgchain,tpipe);
             //做 类似原型链处理

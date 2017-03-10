@@ -2,6 +2,10 @@
     "name" : "demo002",
     "gnodes": [
         {
+            "type" :"cc",
+            "name" :"demo000"
+        },
+        {
             "type" : "exe",
             "name" : "alert",
             "params" : {
@@ -10,10 +14,6 @@
         {
             "type" : "cc",
             "name": "g.demo001"
-        },
-        {
-            "type" :"cc",
-            "name" :"demo000"
         }
     ]
 }

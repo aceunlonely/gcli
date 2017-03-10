@@ -4,12 +4,15 @@ exports.callback=function(pipe,params){
 
     
     var p = pipe;
-    while(p.pre)
+    if(p)
     {
-        p = p.pre;
+        while(p.pre)
+        {
+            p = p.pre;
 
-        console.log("pipe has its pre :" + p.name );
+            console.log("pipe has its pre :" + p.name );
 
+        }
     }
     console.log('it is show end..................................');
 

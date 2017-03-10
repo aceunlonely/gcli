@@ -14,10 +14,6 @@ exports.run=function(gchain,fPipe){
     if((typeof gchain=='string')&&gchain.constructor==String)
     {
         var gch = gchain;
-        if(!path.isAbsolute(gch))
-        {
-            gch= path.join(config.workspace,gch);
-        }
         ge.run(gch);
     }
     else
