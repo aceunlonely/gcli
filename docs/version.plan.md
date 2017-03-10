@@ -17,3 +17,11 @@
 * gpipe.check 0%
 
 ## basic cc apis 0%
+* g.fs(cp mv rm rn add/create find)
+* g.str(replace append reg trim)
+* g.sh()
+
+
+## advanced cc
+
+
