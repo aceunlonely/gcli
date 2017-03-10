@@ -23,6 +23,7 @@
 * g.sh()    0%
 * g.linux()  0%
 * g.win()   0%
+* g.cli(entry )  0%
 
 ## advanced cc
 
