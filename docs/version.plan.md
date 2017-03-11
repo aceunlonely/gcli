@@ -15,6 +15,7 @@
 * null  0%
 * string 0%
 * file 0%
+* route 0%
 * gpipe.check 0%
 
 ## basic cc apis 0%
