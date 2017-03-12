@@ -30,3 +30,14 @@
 ## advanced cc
 
 
+## gcli shell 0%
+* windows shell
+* linux shell
+
+## gcli command center
+* secure 
+* houseware interface
+* simple implements
+
+
+
