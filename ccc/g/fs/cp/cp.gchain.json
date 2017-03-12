@@ -1,0 +1,11 @@
+{
+    "name" : "g.fs.cp",
+    "gnodes": [
+        {
+            "type" : "exe",
+            "name" : "copy",
+            "params" : {
+            }
+        }
+    ]
+}
