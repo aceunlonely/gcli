@@ -31,6 +31,7 @@
 
 
 ## gcli shell 0%
+* tab completion
 * windows shell
 * linux shell
 
