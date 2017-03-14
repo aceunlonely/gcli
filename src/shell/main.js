@@ -1,8 +1,12 @@
-//vars
-var currentCompletion = "help test test1 teab";
+//var
+var mainShell = require('./subShells/main');
+
+var currentCompletion = mainShell.completion;
+
 var shellMap = {};
 var currentShell = 'gcli';
 var runState = false;
+var currentFunction = mainShell.exeFunction;
 
 
 
@@ -25,19 +29,15 @@ var innerRun = function(params){
         completer: completer,
         historySize : 50,
     });
-
+    
     rl.on('line', (line) => {
-    switch(line.trim()) {
-        case 'hello':
-        console.log('world!');
-        break;
-        default:
-        console.log(`Say what? I might have heard '${line.trim()}'`);
-        break;
-    }
+        if(currentFunction)
+        {
+            currentFunction(line,rl);
+        }
     rl.prompt();
     }).on('close', () => {
-    console.log('Have a great day!');
+    console.log('good bye');
     process.exit(0);
     });
 
@@ -62,17 +62,19 @@ var innerRun = function(params){
 }
 
 
-var addSubShell = function(name,completionString)
+var addSubShell = function(name,completionString,exeFunction)
 {
     if(shellMap[name])
     {
         return false;
     }
-    if(completionString)
+    if(!completionString)
     {
         return false;
     }
-    shellMap[name] = completionString;
+    shellMap[name] = {
+        completion : completionString,
+        exe : exeFunction};
 };
 
 //switchShell
@@ -80,7 +82,8 @@ var innerSwitchShell = function(name){
     if(shellMap[name])
     {
         currentShell = name;
-        currentCompletion = shellMap[name];
+        currentCompletion = shellMap[name].completion;
+        currentFunction = shellMap[name].exe;
         console.log('switch to ' + name);
         if(runState)
         {
@@ -92,7 +95,7 @@ var innerSwitchShell = function(name){
 
 
 //initials
-addSubShell('gcli',currentCompletion);
+addSubShell('gcli',currentCompletion,mainShell.exeFunction);
 
 exports.run = innerRun;
 /** 添加子shell */
