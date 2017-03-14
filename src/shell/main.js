@@ -2,9 +2,8 @@
 var currentCompletion = "help test test1 teab";
 var shellMap = {};
 var currentShell = 'gcli';
+var runState = false;
 
-//initials
-addSubShell('gcli',currentCompletion);
 
 
 
@@ -17,43 +16,48 @@ function completer(line) {
   return [showMetion, showLine];
 }
 
-const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-    completer: completer,
-    historySize : 50,
-});
-
-rl.on('line', (line) => {
-  switch(line.trim()) {
-    case 'hello':
-      console.log('world!');
-      break;
-    default:
-      console.log(`Say what? I might have heard '${line.trim()}'`);
-      break;
-  }
-  rl.prompt();
-}).on('close', () => {
-  console.log('Have a great day!');
-  process.exit(0);
-});
-
-rl.on('SIGINT', () => {
-    if(currentShell == 'gcli')
-    {
-        rl.question('Are you sure you want to exit?', (answer) => {
-            if (answer.match(/^y(es)?$/i)) rl.pause();
-        });
-    }
-    else
-    {
-        innerSwitchShell('gcli');
-    }
-});
+var rl=null;
 
 var innerRun = function(params){
-    rl.setPrompt('gcli>')
+     rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout,
+        completer: completer,
+        historySize : 50,
+    });
+
+    rl.on('line', (line) => {
+    switch(line.trim()) {
+        case 'hello':
+        console.log('world!');
+        break;
+        default:
+        console.log(`Say what? I might have heard '${line.trim()}'`);
+        break;
+    }
+    rl.prompt();
+    }).on('close', () => {
+    console.log('Have a great day!');
+    process.exit(0);
+    });
+
+    rl.on('SIGINT', () => {
+        if(currentShell == 'gcli')
+        {
+            rl.question('exit?(yes)', (answer) => {
+                if (answer == "") {rl.pause();return;}
+                if (answer.match(/^y(es)?$/i)) {rl.pause();return;}
+                rl.prompt();
+            });
+        }
+        else
+        {
+            innerSwitchShell('gcli');
+        }
+    });
+
+    runState = true;
+    rl.setPrompt( currentShell+'>')
     rl.prompt();
 }
 
@@ -78,13 +82,22 @@ var innerSwitchShell = function(name){
         currentShell = name;
         currentCompletion = shellMap[name];
         console.log('switch to ' + name);
-        rl.prompt();
+        if(runState)
+        {
+            rl.setPrompt(currentShell +'>');
+            rl.prompt();
+        }
     }
 };
 
 
+//initials
+addSubShell('gcli',currentCompletion);
+
 exports.run = innerRun;
 /** 添加子shell */
 exports.addShell = addSubShell;
+
+exports.switchShell = innerSwitchShell;
 
 
