@@ -31,10 +31,9 @@
 
 
 ## gcli shell 0%
-* tab completion
-* windows shell
-* linux shell
-* recuse cli
+* tab completion 100%
+* shell framework (tab completion,subshell ext,help  etc)  50%
+* gcli>tab commands(help run/exe make delete/del ls/list/show sync etc)
 
 ## gcli command center
 * secure 
