@@ -1,7 +1,7 @@
 //vars
 var currentCompletion = "help test test1 teab";
 var shellMap = {};
-
+var currentShell = 'gcli';
 
 //initials
 addSubShell('gcli',currentCompletion);
@@ -39,11 +39,18 @@ rl.on('line', (line) => {
   process.exit(0);
 });
 
-// rl.on('SIGINT', () => {
-//   rl.question('Are you sure you want to exit?', (answer) => {
-//     if (answer.match(/^y(es)?$/i)) rl.pause();
-//   });
-// });
+rl.on('SIGINT', () => {
+    if(currentShell == 'gcli')
+    {
+        rl.question('Are you sure you want to exit?', (answer) => {
+            if (answer.match(/^y(es)?$/i)) rl.pause();
+        });
+    }
+    else
+    {
+        innerSwitchShell('gcli');
+    }
+});
 
 var innerRun = function(params){
     rl.setPrompt('gcli>')
@@ -64,7 +71,16 @@ var addSubShell = function(name,completionString)
     shellMap[name] = completionString;
 };
 
-//todos  switchShell
+//switchShell
+var innerSwitchShell = function(name){
+    if(shellMap[name])
+    {
+        currentShell = name;
+        currentCompletion = shellMap[name];
+        console.log('switch to ' + name);
+        rl.prompt();
+    }
+};
 
 
 exports.run = innerRun;
