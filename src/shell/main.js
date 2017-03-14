@@ -1,3 +1,14 @@
+
+var changeCompletions
+
+
+
+var run = function(){
+
+
+}
+
+
 const readline = require('readline');
 
 function completer(line) {
@@ -11,11 +22,10 @@ const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
     completer: completer,
-    historySize :50,
+    historySize : 50,
 });
-rl.setPrompt('gcli> ')
+rl.setPrompt('gcli>')
 rl.prompt();
-
 
 rl.on('line', (line) => {
   switch(line.trim()) {
@@ -31,7 +41,6 @@ rl.on('line', (line) => {
   console.log('Have a great day!');
   process.exit(0);
 });
-
 
 rl.on('SIGINT', () => {
   rl.question('Are you sure you want to exit?', (answer) => {

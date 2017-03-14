@@ -34,6 +34,7 @@
 * tab completion
 * windows shell
 * linux shell
+* recuse cli
 
 ## gcli command center
 * secure 
