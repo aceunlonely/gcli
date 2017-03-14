@@ -1,21 +1,20 @@
-
-var changeCompletions
-
-
-
-var run = function(){
+//vars
+var currentCompletion = "help test test1 teab";
+var shellMap = {};
 
 
-}
+//initials
+addSubShell('gcli',currentCompletion);
+
 
 
 const readline = require('readline');
-
 function completer(line) {
-  const completions = '.help .error .exit .quit .q'.split(' ');
+  var completions = currentCompletion.split(' ');
   const hits = completions.filter((c) => { return c.indexOf(line) === 0 });
-  // show all completions if none found
-  return [hits.length ? hits : completions, line];
+  var showLine = line;
+  var showMetion =hits.length ? hits : completions;
+  return [showMetion, showLine];
 }
 
 const rl = readline.createInterface({
@@ -24,8 +23,6 @@ const rl = readline.createInterface({
     completer: completer,
     historySize : 50,
 });
-rl.setPrompt('gcli>')
-rl.prompt();
 
 rl.on('line', (line) => {
   switch(line.trim()) {
@@ -42,8 +39,36 @@ rl.on('line', (line) => {
   process.exit(0);
 });
 
-rl.on('SIGINT', () => {
-  rl.question('Are you sure you want to exit?', (answer) => {
-    if (answer.match(/^y(es)?$/i)) rl.pause();
-  });
-});
+// rl.on('SIGINT', () => {
+//   rl.question('Are you sure you want to exit?', (answer) => {
+//     if (answer.match(/^y(es)?$/i)) rl.pause();
+//   });
+// });
+
+var innerRun = function(params){
+    rl.setPrompt('gcli>')
+    rl.prompt();
+}
+
+
+var addSubShell = function(name,completionString)
+{
+    if(shellMap[name])
+    {
+        return false;
+    }
+    if(completionString)
+    {
+        return false;
+    }
+    shellMap[name] = completionString;
+};
+
+//todos  switchShell
+
+
+exports.run = innerRun;
+/** 添加子shell */
+exports.addShell = addSubShell;
+
+
