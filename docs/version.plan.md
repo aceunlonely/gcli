@@ -31,8 +31,11 @@
 
 
 ## gcli shell 0%
-* tab completion 100%
 * shell framework (tab completion,subshell ext,help,resolve varied command pattern, etc)  50%
+    tab completion 100%
+    subshell ext 100%
+    help  -
+    resolve varied command pattern  0%
 * gcli>tab commands(help run/exe make delete/del ls/list/show sync etc)
 
 ## gcli command center
