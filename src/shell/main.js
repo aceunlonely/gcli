@@ -8,7 +8,12 @@ var currentShell = 'gcli';
 var runState = false;
 var currentFunction = mainShell.exeFunction;
 
-
+//主要方法函数
+var main ={
+    readline : rl,
+    addShell : addSubShell,
+    switchShell : innerSwitchShell
+};
 
 
 const readline = require('readline');
@@ -33,7 +38,16 @@ var innerRun = function(params){
     rl.on('line', (line) => {
         if(currentFunction)
         {
-            currentFunction(line,rl);
+            //your line must in completions
+            var firstLineCmd = line.split(' ')[0];
+            if(currentCompletion.split(' ').some(function(ele,index,array){ return (ele == firstLineCmd); }))
+            {
+                currentFunction(line,main);
+            }
+            else
+            {
+                console.log(`there is no [${line}] in [${currentShell}]`);
+            }
         }
     rl.prompt();
     }).on('close', () => {
@@ -75,6 +89,7 @@ var addSubShell = function(name,completionString,exeFunction)
     shellMap[name] = {
         completion : completionString,
         exe : exeFunction};
+    return true;
 };
 
 //switchShell
